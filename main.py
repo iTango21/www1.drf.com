@@ -107,7 +107,7 @@ cou_ = len(a_tags_with_id)
 for i, tag in enumerate(a_tags_with_id):
 
     id_ = tag['id']
-    print(f'{i + 1} / {cou_} --->>> {id_}')
+    # print(f'{i + 1} / {cou_} --->>> {id_}')
 
     cookies = {
         'drf_web_post_login_url': '/HorseBrowseMessages.do?null',
@@ -182,10 +182,10 @@ for i, tag in enumerate(a_tags_with_id):
         new_data.append(data__)  # Add new data to the new_data list
         new_h += 1
 
-        print(f'{id_} --->>> New = {new_h} !!!!!!!!!!!!!!!')
+        print(f'{i + 1} / {cou_}\t{id_} --->>> New = {new_h} !!!!!!!!!!!!!!!')
     else:
         # break  # Прерывание цикла
-        print(f'{id_} --->>> is on the list!')
+        print(f'{i + 1} / {cou_}\t{id_} --->>> is on the list!')
 
 # Write data from list_222 to the file qwerty.json
 with open("all.json", "w") as file:
