@@ -4,7 +4,7 @@ import json
 
 
 loginName = 'NWILDE@HTC-TX.COM'
-password = '*****'
+password = 'Kiefer13@'
 
 headers = {
     'authority': 'registration.drf.com',
@@ -186,6 +186,9 @@ for i, tag in enumerate(a_tags_with_id):
     else:
         # break  # Прерывание цикла
         print(f'{i + 1} / {cou_}\t{id_} --->>> is on the list!')
+
+
+print(f'\tTotal new objects: {new_h}')
 
 # Write data from list_222 to the file qwerty.json
 with open("all.json", "w") as file:
