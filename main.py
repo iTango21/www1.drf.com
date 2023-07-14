@@ -4,7 +4,7 @@ import json
 
 
 loginName = 'NWILDE@HTC-TX.COM'
-password = '*****'
+password = 'Kiefer13@'
 
 headers = {
     'authority': 'registration.drf.com',
@@ -100,11 +100,14 @@ with open("all.json", "r") as file:
 
 list_222 = list_111[:]  # Create a copy of the list list_111
 new_data = []  # List to store only new data
+new_h = 0
+
+cou_ = len(a_tags_with_id)
 
 for i, tag in enumerate(a_tags_with_id):
 
     id_ = tag['id']
-    print(f'{i} --->>> {id_}')
+    print(f'{i + 1} / {cou_} --->>> {id_}')
 
     cookies = {
         'drf_web_post_login_url': '/HorseBrowseMessages.do?null',
@@ -177,9 +180,11 @@ for i, tag in enumerate(a_tags_with_id):
     if not data_exists:
         list_222.insert(0, data__)  # Add data to the beginning of list_222
         new_data.append(data__)  # Add new data to the new_data list
+        new_h += 1
+        print(f'New: {new_h} !!!!!!!!!!!!!!!')
     else:
-        break  # Прерывание цикла
-
+        # break  # Прерывание цикла
+        print(f'{id_} --->>> is on the list!')
 
 # Write data from list_222 to the file qwerty.json
 with open("all.json", "w") as file:
