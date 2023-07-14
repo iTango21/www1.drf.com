@@ -1,45 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-import lxml
 import json
-import time
-import os
-import datetime
-
-# # Получаем текущее время в юникс-формате
-# current_time = datetime.datetime.now().timestamp()
-#
-# # Путь к папке с файлами
-# folder_path = r"./JSON/"
-#
-# # Переменные для хранения информации о файле с наименьшей разницей времени
-# closest_file = ""
-# closest_time_diff = float("inf")
-#
-# # Обходим все файлы в папке
-# for filename in os.listdir(folder_path):
-#     # Проверяем, что файл имеет расширение .json
-#     if filename.endswith(".json"):
-#         # Получаем время из имени файла
-#         file_time = int(os.path.splitext(filename)[0])
-#
-#         # Вычисляем разницу времени между текущим временем и временем файла
-#         time_diff = abs(current_time - file_time)
-#
-#         # Если разница времени меньше, чем у предыдущего найденного файла, обновляем информацию
-#         if time_diff < closest_time_diff:
-#             closest_file = filename
-#             closest_time_diff = time_diff
-#
-# # Выводим найденный файл с наименьшей разницей времени
-# print("Файл с наименьшей разницей времени:", closest_file)
-#
-# breakpoint()
-
 
 
 loginName = 'NWILDE@HTC-TX.COM'
-password = '****'
+password = '*****'
 
 headers = {
     'authority': 'registration.drf.com',
@@ -64,26 +29,8 @@ json_data = {
 
 response = requests.post('https://registration.drf.com/v2/login', headers=headers, json=json_data)
 
-
-
 data_ = json.loads(response.text)
-# print(data_)
-# print()
-# print(response.text)
-
-
-# # Получаем все куки из ответа
-# cookies = response.cookies
-# print(cookies)
-
-# # Распечатываем куки
-# for cookie in cookies:
-#     print(cookie)
-#     print(cookie.name, cookie.value)
-
 customerId = data_['customerId']
-
-# url2 = 'https://www1.drf.com/HorseBrowseMessages.do'
 
 cookies = {
     'drf_web_post_login_url': '/HorseBrowseMessages.do?null',
@@ -139,37 +86,20 @@ headers = {
 
 response = requests.get('https://www1.drf.com/HorseBrowseMessages.do', cookies=cookies, headers=headers)
 
-# print(f'1   {response.text}')
-
 soup = BeautifulSoup(response.text, 'lxml')
 pg__ = soup.find_all('tbody')
-# pg__ = soup.find_all('tbody', class_='page-numbers')
 
-# tr__ = pg__[0].find_all('tr')
-#
-# print(len(tr__))
-
-# Находим все теги 'a' с атрибутом 'id'
+# Find all 'a' tags with the 'id' attribute
 a_tags_with_id = pg__[0].find_all('a', id=True)
-
-# # Получаем значения атрибута 'id' для каждого тега 'a'
-# ids = [tag['id'] for tag in a_tags_with_id]
-#
-# # Записываем значения 'id' в файл '123.txt'
-# with open('123.txt', 'w') as file:
-#     file.write('\n'.join(ids))
 
 arr_ = []
 
-# Создаем имя файла на основе текущего времени в формате UNIX
-filename = int(time.time())
-
-# Чтение данных из файла all.json в список list_111
+# Read data from the file "all.json" into the list list_111
 with open("all.json", "r") as file:
     list_111 = json.load(file)
 
-list_222 = list_111[:]  # Создание копии списка list_111
-new_data = []  # Список для хранения только новых данных
+list_222 = list_111[:]  # Create a copy of the list list_111
+new_data = []  # List to store only new data
 
 for i, tag in enumerate(a_tags_with_id):
 
@@ -237,9 +167,7 @@ for i, tag in enumerate(a_tags_with_id):
 
     data__ = json.loads(response.text)
 
-    # arr_.append(data__)
-
-    # Проверка на равенство с блоками в list_111
+    # Check for equality with the blocks in list_111
     data_exists = False
     for item in list_111:
         if item == data__:
@@ -247,25 +175,16 @@ for i, tag in enumerate(a_tags_with_id):
             break
 
     if not data_exists:
-        list_222.insert(0, data__)  # Добавление данных в начало list_222
-        new_data.append(data__)  # Добавление новых данных в список new_data
+        list_222.insert(0, data__)  # Add data to the beginning of list_222
+        new_data.append(data__)  # Add new data to the new_data list
     else:
         break  # Прерывание цикла
 
-    # if i == 3:
-    #     break
 
-# Запись данных из list_222 в файл qwerty.json
+# Write data from list_222 to the file qwerty.json
 with open("all.json", "w") as file:
     json.dump(list_222, file, indent=4, ensure_ascii=False)
 
-# Запись только новых данных в файл new.json
+# Write only new data to the file new.json
 with open("new.json", "w") as file:
     json.dump(new_data, file, indent=4, ensure_ascii=False)
-
-
-# with open(f"all.json", 'w+', encoding='utf-8') as file:
-#     json.dump(arr_, file, indent=4, ensure_ascii=False)
-
-# with open(f"./JSON/{filename}.json", 'w+', encoding='utf-8') as file:
-#     json.dump(arr_, file, indent=4, ensure_ascii=False)
