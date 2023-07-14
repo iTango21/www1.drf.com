@@ -4,7 +4,7 @@ import json
 
 
 loginName = 'NWILDE@HTC-TX.COM'
-password = 'Kiefer13@'
+password = '*****'
 
 headers = {
     'authority': 'registration.drf.com',
