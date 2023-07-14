@@ -4,7 +4,7 @@ import json
 
 
 loginName = 'NWILDE@HTC-TX.COM'
-password = '*****'
+password = 'Kiefer13@'
 
 headers = {
     'authority': 'registration.drf.com',
@@ -181,7 +181,8 @@ for i, tag in enumerate(a_tags_with_id):
         list_222.insert(0, data__)  # Add data to the beginning of list_222
         new_data.append(data__)  # Add new data to the new_data list
         new_h += 1
-        print(f'New: {new_h} !!!!!!!!!!!!!!!')
+
+        print(f'{id_} --->>> New = {new_h} !!!!!!!!!!!!!!!')
     else:
         # break  # Прерывание цикла
         print(f'{id_} --->>> is on the list!')
