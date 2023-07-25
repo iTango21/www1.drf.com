@@ -9,6 +9,11 @@ output_mod_file_path = "main_test_mod.json"
 # Keys to remove
 keys_to_remove = {'payoffs', 'wagerTypes', 'payoffDTOs', 'sireLink'}
 
+#
+# Leave the value of variable race_ equal to race_ = '' if you want to get information in all races!!!
+#
+race_ = '5'
+
 
 # Recursively removing keys from a dictionary
 def recursive_remove_keys(data):
@@ -125,5 +130,17 @@ if __name__ == "__main__":
     write_output_data(input_data)
 
     recursive_remove_keys(input_data)
+
+    if race_ != '':
+        selected_race = None
+        for race in input_data["races"]:
+            if race["raceKey"]["raceNumber"] == int(race_):
+                selected_race = race
+                break
+
+        if selected_race is not None:
+            input_data = {"races": [selected_race]}
+        else:
+            print(f"\n>>> !!! <<< Section with race number {race_} not found.")
 
     write_output_mod_data(input_data)
